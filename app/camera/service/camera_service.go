@@ -2,27 +2,26 @@ package service
 
 import (
 	"golang-with-ffmpeg-fiber/app/camera/model"
-	"sync"
 )
-
-var once sync.Once
 
 type cameraService struct {
 	cameraRepository model.CameraRepository
 }
 
-var instance *cameraService
-
 func NewCameraService(cameraRepo model.CameraRepository) model.CameraService {
-	once.Do(func() {
-		instance = &cameraService{
-			cameraRepository: cameraRepo,
-		}
-	})
-
-	return instance
+	return &cameraService{
+		cameraRepository: cameraRepo,
+	}
 }
 
-func (c *cameraService) SaveService(camera *model.Camera) (*model.Camera, error) {
+func (c *cameraService) Save(camera *model.Camera) (*model.Camera, error) {
 	return c.cameraRepository.Save(camera)
+}
+
+func (c *cameraService) GetCameraById(id int) (*model.Camera, error) {
+	return c.cameraRepository.GetCameraById(id)
+}
+
+func (c *cameraService) GetAllCamera() (*[]model.Camera, error) {
+	return c.cameraRepository.GetAllCamera()
 }

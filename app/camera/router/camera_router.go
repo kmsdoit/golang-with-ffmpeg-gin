@@ -17,5 +17,7 @@ func CameraRouter(conn *gorm.DB, gin *gin.Engine) {
 	cameraRouterV1 := gin.Group("/api/v1/camera")
 	{
 		cameraRouterV1.POST("/create", cameraController.CreateCameraController)
+		cameraRouterV1.GET("/get/camera", cameraController.GetCameraByIdController)
+		cameraRouterV1.GET("/cameras", cameraController.GetAllCameraController)
 	}
 }

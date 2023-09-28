@@ -9,8 +9,12 @@ type Camera struct {
 
 type CameraRepository interface {
 	Save(camera *Camera) (*Camera, error)
+	GetCameraById(id int) (*Camera, error)
+	GetAllCamera() (*[]Camera, error)
 }
 
 type CameraService interface {
-	SaveService(camera *Camera) (*Camera, error)
+	Save(camera *Camera) (*Camera, error)
+	GetCameraById(id int) (*Camera, error)
+	GetAllCamera() (*[]Camera, error)
 }
